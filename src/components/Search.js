@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 function Search({ onSearch, showFavorites, handleFavourite , updateParentState }) {
   const [query, setQuery] = useState('');
   
-
+//If query if empty them dummy will remain same else dummy will be null
   const handleSearch = () => {
     if(query===null){
       updateParentState('healthy');

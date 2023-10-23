@@ -28,11 +28,12 @@ function App() {
 
   }, []);
 
-
+//When search is done dummy value will change to null
   const updateParentState = (newValue) => {
     setDummy(newValue);
   };
 
+  //It deals with fetching searched recipes
   const getReceipe = (query) => {
     fetch(`https://api.edamam.com/search?q=${query}&app_id=c550d6f0&app_key=e332f67c5e8278584f7e2a8c0244995a`)
       .then((response) => response.json())
@@ -42,14 +43,18 @@ function App() {
       });
   }
 
+  //Used to show selected item popup
   const handleItemClick = (recipe) => {
     setSelectedItem(recipe);
   };
 
+//It will make the selectedItem False and popup will close
   const closePopup = () => {
     setSelectedItem(null);
   };
 
+
+  //It will popup favourite list
   const handleFavourite = () => {
     setShowFavorites(!showFavorites);
   }
@@ -60,6 +65,7 @@ function App() {
 
     const isFavorited = favoritedItems.some((item) => item.uri === recipe.uri);
 
+    //If the item already present then it will remove it from list
     if (isFavorited) {
       const updatedItems = storedItems.filter((item) => item !== selectedItemString);
       localStorage.setItem('selectedItems', JSON.stringify(updatedItems));
@@ -67,6 +73,7 @@ function App() {
       localStorage.setItem('favoritedItems', JSON.stringify(updatedFavoritedItems));
       setFavoritedItems(updatedFavoritedItems);
     } else {
+      //If item is not present then it will add new item to favourite list
       const updatedItems = [...storedItems, selectedItemString];
       localStorage.setItem('selectedItems', JSON.stringify(updatedItems));
       const updatedFavoritedItems = [...favoritedItems, recipe];

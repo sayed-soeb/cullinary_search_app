@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 
 function RecipeList({ receipe, favoritedItems, onItemClick, onFavorite , onSearch , childProp}) {
+  //On first render it will show result for dummy state value as query.
   useEffect(() => {
     onSearch(childProp);
 }, [childProp]);
